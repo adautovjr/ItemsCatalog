@@ -1,0 +1,16 @@
+{% extends "template.html" %}
+{% block title %}
+	Ver item
+{% endblock %}
+{% block content %}
+	<a href="/">Back</a>
+	<br>
+	<h1>{{ item.name }}</h1>
+	<p>{{ item.description }}</p>
+	<br>
+	{% if isItemOwner(item.id) %}
+		<a href="{{ url_for('updateItem', item_id = item.id) }}">Update</a>
+		<br>
+		<a href="{{ url_for('deleteItem', item_id = item.id) }}">Delete</a>
+	{% endif %}
+{% endblock %}

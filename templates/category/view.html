@@ -1,0 +1,27 @@
+{% extends "template.html" %}
+{% block title %}
+	Ver categoria
+{% endblock %}
+{% block content %}
+	<a href="/">Back</a>
+	<br>
+	<h1>{{ category.name }}</h1>
+	<br>
+	{% if isCategoryOwner(category.id) %}
+	<a href="{{ url_for('updateCategory', category_id = category.id) }}">Update</a>
+	<br>
+	<a href="{{ url_for('deleteCategory', category_id = category.id) }}">Delete</a>
+	<br>
+	{% endif %}
+	<h3><a href="{{ url_for('viewItemsJson', category_id = category.id) }}">Items</a></h3>
+		{% if isCategoryOwner(category.id) %}
+			<a href="{{ url_for('createItem', category_id = category.id) }}">Add item</a>
+		{% endif %}
+		<ul>
+		{% for item in items %}
+			<li>
+				<a href="{{ url_for('viewItem', item_id = item.id) }}">{{ item.name }}</a>
+			</li>
+		{% endfor %}
+		</ul>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "template.html" %}
+{% block title %}
+	Tela de Login
+{% endblock %}
+{% block headInclude %}
+    <script src="//apis.google.com/js/platform.js?onload=start" async defer></script>
+{% endblock %}
+{% block content %}
+	<a href="/">Back</a>
+	<br>
+	<h1>Entre para acessar o conteúdo!</h1>
+    <br>
+    <h1>State: {{ state }}</h1>
+    
+    <a href="{{ url_for('login') }}">Login</a>
+{% endblock %}

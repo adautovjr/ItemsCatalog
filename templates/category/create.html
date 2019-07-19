@@ -1,0 +1,14 @@
+{% extends "template.html" %}
+{% block title %}
+	Nova categoria
+{% endblock %}
+{% block content %}
+	<a href="/">Back</a>
+	<br>
+	<h1>Nova categoria</h1>
+	<br>
+	<form action="{{ url_for('createCategory') }}" method="POST" accept-charset="utf-8">
+		<input type="text" name="name" placeholder="name">
+		<button type="submit">Enviar</button>
+	</form>
+{% endblock %}
