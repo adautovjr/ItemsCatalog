@@ -1,7 +1,19 @@
-<h1 class="text-center">NAVBAR</h1>
-{% if user %}
-<h1>Olá {{ user.name }}</h1>
-<a href="{{ url_for('logout') }}">Logout</a>
-{% else %}
-<a href="{{ url_for('login') }}">Login</a>
-{% endif %}
+<div class="container">
+    <div class="row">
+        <div class="col-12 py-5 navbar-container">
+            <div class="logo-container">
+                <a href="/">
+                    <img class="logo" src="{{ url_for('static', filename='img/logo.svg') }}" alt="logo.png">
+                </a>
+            </div>
+            <div class="login-container text-right">
+                {% if user %}
+                <h1 class="greeting">Olá {{ user.name }}</h1>
+                <a class="btn btn-outline-light" href="{{ url_for('logout') }}">Logout</a>
+                {% else %}
+                <a class="btn btn-outline-light" href="{{ url_for('login') }}">Login</a>
+                {% endif %}
+            </div>             
+        </div>
+    </div>
+</div>

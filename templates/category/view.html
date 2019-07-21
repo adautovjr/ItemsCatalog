@@ -3,25 +3,33 @@
 	Ver categoria
 {% endblock %}
 {% block content %}
-	<a href="/">Back</a>
-	<br>
-	<h1>{{ category.name }}</h1>
-	<br>
-	{% if isCategoryOwner(category.id) %}
-	<a href="{{ url_for('updateCategory', category_id = category.id) }}">Update</a>
-	<br>
-	<a href="{{ url_for('deleteCategory', category_id = category.id) }}">Delete</a>
-	<br>
-	{% endif %}
-	<h3><a href="{{ url_for('viewItemsJson', category_id = category.id) }}">Items</a></h3>
-		{% if isCategoryOwner(category.id) %}
-			<a href="{{ url_for('createItem', category_id = category.id) }}">Add item</a>
-		{% endif %}
-		<ul>
+	<div class="title-container">
+		<div class="back">
+			<a class="btn btn-outline-info" href="/">voltar</a>
+		</div>
+		<div class="title">
+			<h1>{{ category.name }}</h1>
+		</div>
+		<div class="btn-new-container">
+			{% if isCategoryOwner(category.id) %}
+			<a class="btn btn-outline-success" href="{{ url_for('createItem', category_id = category.id) }}">Add item</a>
+			<a class="btn btn-outline-primary" href="{{ url_for('updateCategory', category_id = category.id) }}">Update</a>
+			<a class="btn btn-outline-danger" href="{{ url_for('deleteCategory', category_id = category.id) }}">Delete</a>
+			{% endif %}
+		</div>
+	</div>
+	<h3 class="mt-4">
+		Itens da categoria 
+		<small>
+			<a href="{{ url_for('viewItemsJson', category_id = category.id) }}">Ver Json</a>
+		</small>
+	</h3>
+	<ul class="list-container">
 		{% for item in items %}
 			<li>
 				<a href="{{ url_for('viewItem', item_id = item.id) }}">{{ item.name }}</a>
 			</li>
 		{% endfor %}
-		</ul>
+	</ul>
+
 {% endblock %}

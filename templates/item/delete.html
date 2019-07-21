@@ -3,11 +3,17 @@
 	Deletar Item
 {% endblock %}
 {% block content %}
-	<a href="/">Back</a>
-	<br>
-	<h1>Tem certeza que deseja deletar o item <a href="{{ url_for('viewItem', item_id = item.id)}}">{{ item.name }}</a></h1>
-	<br>
-	<form action="{{ url_for('deleteItem', item_id = item.id) }}" method="POST" accept-charset="utf-8">
-		<button type="submit" name="delete" value="1">Deletar</button>
-	</form>
+	<div class="title-container">
+		<div class="back">
+			<a class="btn btn-outline-info" href="{{ url_for('viewCategory', category_id = item.category_id)}}">voltar</a>
+		</div>
+	</div>
+	<div class="title mt-4">
+		<h1>Tem certeza que deseja deletar o item <a href="{{ url_for('viewItem', item_id = item.id)}}">{{ item.name }}</a>?</h1>
+	</div>
+	<div class="form-container">
+		<form action="{{ url_for('deleteItem', item_id = item.id) }}" method="POST" accept-charset="utf-8">
+			<button type="submit" class="btn btn-outline-danger" name="delete" value="1">Deletar</button>
+		</form>
+	</div>
 {% endblock %}

@@ -3,13 +3,29 @@
 	Atualizar item
 {% endblock %}
 {% block content %}
-	<a href="/">Back</a>
-	<br>
-	<h1><a href="{{ url_for('viewItem', item_id = item.id)}}">{{ item.name }}</a></h1>
-	<br>
-	<form action="{{ url_for('updateItem', item_id = item.id) }}" method="POST" accept-charset="utf-8">
-		<input type="text" name="name" value="{{ item.name }}" onClick="this.select();">
-		<input type="text" name="description" value="{{ item.description }}" onClick="this.select();">
-		<button type="submit">Enviar</button>
-	</form>
+	<div class="title-container">
+		<div class="back">
+			<a class="btn btn-outline-info" href="{{ url_for('viewCategory', category_id = item.category_id)}}">voltar</a>
+		</div>
+		<div class="title">
+			<h1><a href="{{ url_for('viewItem', item_id = item.id)}}">{{ item.name }}</a></h1>
+		</div>
+		<div class="empty">	</div>
+	</div>
+	<div class="form-container">
+		<form action="{{ url_for('updateItem', item_id = item.id) }}" method="POST" accept-charset="utf-8">
+			<div class="form-group mt-5">
+				<label for="name">Nome</label>
+				<input type="text" class="form-control" value="{{ item.name }}" onClick="this.select();" id="name" placeholder="Nome" name="name" onClick="this.select();">
+				<small id="nameHelp" class="form-text text-muted">Digite o nome do item</small>
+			</div>
+
+			<div class="form-group mt-5">
+				<label for="description">Descrição</label>
+				<textarea rows="5" class="form-control" onClick="this.select();" id="description" placeholder="Descrição" name="description" onClick="this.select();">{{ item.description }}</textarea>
+				<small id="descriptionHelp" class="form-text text-muted">Descreva o item com suas próprias palavras</small>
+			</div>
+			<button class="btn btn-outline-primary" type="submit">Enviar</button>
+		</form>
+	</div>
 {% endblock %}

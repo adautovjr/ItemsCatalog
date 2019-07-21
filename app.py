@@ -48,7 +48,7 @@ def requires_auth(f):
     def decorated(*args, **kwargs):
         if 'profile' not in login_session:
             # Redirect to Login page here
-            return redirect('/login')
+            return redirect(url_for('login'))
         return f(*args, **kwargs)
     return decorated
 
@@ -78,14 +78,6 @@ def callback_handling():
     
     return redirect('/')
 
-
-@app.route('/login')
-def showLogin():
-    state = ''.join(random.choice(string.ascii_uppercase + string.digits)
-                    for x in range(32))
-    login_session['state'] = state
-    return render_template('auth/login.html', state=login_session['state']) # 
-
 @app.route('/connect')
 def login():
     return auth0.authorize_redirect(redirect_uri='http://localhost:5000/callback', audience='https://fadingminotaur5.auth0.com/userinfo')
@@ -94,7 +86,7 @@ def login():
 def logout():
     # Clear session stored data
     login_session.clear()
-    app.jinja_env.globals.update(user=None)
+    app.jinja_env.globals.update(user=False)
     # Redirect user to logout endpoint
     params = {'returnTo': url_for('indexCategories', _external=True), 'client_id': 'GHFAORqpG5uLMAqqBPF1w4DxhUlaaBFq'}
     return redirect(auth0.api_base_url + '/v2/logout?' + urlencode(params))
@@ -141,7 +133,7 @@ def indexCategories():
         user = login_session['profile']
     else:
         user = False
-    return render_template('index.html', categories=categories)
+    return render_template('index.html', categories=categories, currentPage=request.path)
 
 
 @app.route('/category/<int:category_id>/')
@@ -200,6 +192,9 @@ def deleteCategory(category_id):
 
 def isCategoryOwner(category_id):
     category = session.query(Category).filter_by(id=category_id).one()
+
+    if not userLoggedIn():
+        return False
     
     if login_session['profile']['user_id'] == category.user_id: 
         return True 
@@ -280,6 +275,9 @@ def deleteItem(item_id):
 
 def isItemOwner(item_id):
     item = session.query(Item).filter_by(id=item_id).one()
+    
+    if not userLoggedIn():
+        return False
     
     if login_session['profile']['user_id'] == item.user_id: 
         return True 

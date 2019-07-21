@@ -3,11 +3,18 @@
 	Index Categories
 {% endblock %}
 {% block content %}
-	<h1>Todas as categorias</h1>
-	<br>
-	<a href="{{ url_for('createCategory') }}">Nova categoria</a>
-	{% for category in categories %}
-	<h2><a href="{{ url_for('viewCategory', category_id = category.id)}}">{{ category.name }}</a></h2>
-	<br>
-	{% endfor %}
+
+	<div class="title-container">
+		<div class="title">
+			<h1>Todas as categorias</h1>
+		</div>
+		<div class="btn-new-container">
+			<a class="btn btn-outline-success" href="{{ url_for('createCategory') }}">Nova categoria</a>
+		</div>
+	</div>
+	<ul class="list-container">
+		{% for category in categories %}
+		<li><a href="{{ url_for('viewCategory', category_id = category.id)}}">{{ category.name }}</a></li>
+		{% endfor %}
+	</ul>
 {% endblock %}

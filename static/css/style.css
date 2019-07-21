@@ -1,0 +1,56 @@
+body {
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#7e80ea+0,3e6899+85,3e6899+85 */
+    background: #7e80ea; /* Old browsers */
+    background: -moz-linear-gradient(45deg,  #7e80ea 0%, #3e6899 85%, #3e6899 85%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(45deg,  #7e80ea 0%,#3e6899 85%,#3e6899 85%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(45deg,  #7e80ea 0%,#3e6899 85%,#3e6899 85%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7e80ea', endColorstr='#3e6899',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+    min-height: 100vh;
+}
+a, a:hover {
+    color: #3e6899;
+}
+.card {
+    -webkit-box-shadow: 0px 0px 37px -18px rgba(0,0,0,0.5);
+    -moz-box-shadow: 0px 0px 37px -18px rgba(0,0,0,0.5);
+    box-shadow: 0px 0px 37px -18px rgba(0,0,0,0.5);
+    border-radius: 10px;
+}
+.navbar-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+h1.greeting, .white, .white a, .white a:hover {
+    color: white;
+}
+.white a {
+    text-decoration: underline;
+}
+.title-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.title h1 {
+    color: #3d6798;
+}
+.list-container {
+    border-left: 2px dashed #7e80ea;
+    padding: 0 20px;
+    margin-top: 30px;
+    list-style: none;
+}
+.list-container li {
+    padding: 10px 0;
+    font-size: 30px;
+}
+@media (max-width: 992px){
+    .title-container .back {
+        flex-basis: 20%;
+    }
+    .title-container .title {
+        flex-basis: 80%;
+    }
+}

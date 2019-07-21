@@ -3,14 +3,31 @@
 	Ver item
 {% endblock %}
 {% block content %}
-	<a href="/">Back</a>
-	<br>
-	<h1>{{ item.name }}</h1>
-	<p>{{ item.description }}</p>
-	<br>
-	{% if isItemOwner(item.id) %}
-		<a href="{{ url_for('updateItem', item_id = item.id) }}">Update</a>
-		<br>
-		<a href="{{ url_for('deleteItem', item_id = item.id) }}">Delete</a>
-	{% endif %}
+
+	<div class="title-container">
+		<div class="back">
+			<a class="btn btn-outline-info" href="{{ url_for('viewCategory', category_id = item.category_id)}}">voltar</a>
+		</div>
+		<div class="title">
+			<h1>{{ item.name }}</h1>
+		</div>
+		<div class="btn-new-container">
+			{% if isItemOwner(item.id) %}
+			<a class="btn btn-outline-primary" href="{{ url_for('updateItem', item_id = item.id) }}">Update</a>
+			<a class="btn btn-outline-danger" href="{{ url_for('deleteItem', item_id = item.id) }}">Delete</a>
+			{% endif %}
+		</div>
+	</div>
+	<h3 class="mt-4">
+		<small>
+			{{ item.description }}
+		</small>
+	</h3>
+	<ul class="list-container">
+		{% for item in items %}
+			<li>
+				<a href="{{ url_for('viewItem', item_id = item.id) }}">{{ item.name }}</a>
+			</li>
+		{% endfor %}
+	</ul>
 {% endblock %}
