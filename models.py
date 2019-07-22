@@ -1,9 +1,10 @@
 import os
 import sys
+from sqlalchemy import create_engine
 from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
-from sqlalchemy import create_engine
+from sqlalchemy_utils import database_exists, create_database
 
 Base = declarative_base()
 
@@ -20,7 +21,7 @@ class User(Base):
 
     @property
     def serialize(self):
-
+    
         return {
             'id': self.id,
             'name': self.name,
@@ -39,7 +40,7 @@ class Category(Base):
 
     @property
     def serialize(self):
-
+    
         return {
             'id': self.id,
             'name': self.name
@@ -58,7 +59,7 @@ class Item(Base):
 
     @property
     def serialize(self):
-
+    
         return {
             'id': self.id,
             'name': self.name,
@@ -66,6 +67,10 @@ class Item(Base):
         }
 
 
+
 engine = create_engine('postgresql://root:123456@localhost:5432/catalog')
+
+if not database_exists(engine.url):
+    create_database(engine.url)
 
 Base.metadata.create_all(engine)
