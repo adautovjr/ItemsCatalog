@@ -1,5 +1,7 @@
 import os
 import sys
+import psycopg2
+from psycopg2.extensions import AsIs
 from sqlalchemy import create_engine
 from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
@@ -21,7 +23,7 @@ class User(Base):
 
     @property
     def serialize(self):
-    
+        
         return {
             'id': self.id,
             'name': self.name,
@@ -40,7 +42,7 @@ class Category(Base):
 
     @property
     def serialize(self):
-    
+        
         return {
             'id': self.id,
             'name': self.name
@@ -59,16 +61,34 @@ class Item(Base):
 
     @property
     def serialize(self):
-    
+        
         return {
             'id': self.id,
             'name': self.name,
             'description': self.description
         }
 
+connection = psycopg2.connect(user = "postgres",
+                                password = "123456",
+                                host = "localhost",
+                                port = "5432",
+                                database = "catalog")
 
+try:
 
-engine = create_engine('postgresql://root:123456@localhost:5432/catalog')
+    cur=connection.cursor()
+
+    cur.execute('CREATE ROLE root LOGIN ENCRYPTED PASSWORD \''+str(123456)+'\' SUPERUSER INHERIT NOCREATEDB NOCREATEROLE NOREPLICATION' )
+
+except (Exception, psycopg2.Error) as error :
+    print ("Error while connecting to PostgreSQL", error)
+finally:
+    #closing database connection.
+    if(connection):
+        cur.close()
+        connection.close()
+
+engine = create_engine('postgresql://rootr:123456@localhost:5432/catalog')
 
 if not database_exists(engine.url):
     create_database(engine.url)
