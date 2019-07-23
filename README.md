@@ -18,5 +18,5 @@ pip3 install -r requirements.txt
 ## Usage
 Execute the code below to run the server, then access http://localhost:5000
 ```
-python app.py
+python3 app.py
 ```
