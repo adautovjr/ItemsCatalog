@@ -68,27 +68,27 @@ class Item(Base):
             'description': self.description
         }
 
-connection = psycopg2.connect(user = "postgres",
-                                password = "123456",
-                                host = "localhost",
-                                port = "5432",
-                                database = "catalog")
+# connection = psycopg2.connect(user = "postgres",
+#                                 password = "123456",
+#                                 host = "localhost",
+#                                 port = "5432",
+#                                 database = "catalog")
 
-try:
+# try:
 
-    cur=connection.cursor()
+#     cur=connection.cursor()
 
-    cur.execute('CREATE ROLE root LOGIN ENCRYPTED PASSWORD \''+str(123456)+'\' SUPERUSER INHERIT NOCREATEDB NOCREATEROLE NOREPLICATION' )
+#     cur.execute('CREATE ROLE root LOGIN ENCRYPTED PASSWORD \''+str(123456)+'\' SUPERUSER INHERIT NOCREATEDB NOCREATEROLE NOREPLICATION' )
 
-except (Exception, psycopg2.Error) as error :
-    print ("Error while connecting to PostgreSQL", error)
-finally:
-    #closing database connection.
-    if(connection):
-        cur.close()
-        connection.close()
+# except (Exception, psycopg2.Error) as error :
+#     print ("Error while connecting to PostgreSQL", error)
+# finally:
+#     #closing database connection.
+#     if(connection):
+#         cur.close()
+#         connection.close()
 
-engine = create_engine('postgresql://rootr:123456@localhost:5432/catalog')
+engine = create_engine('postgresql://postgres:123456@localhost:5432/catalog')
 
 if not database_exists(engine.url):
     create_database(engine.url)
