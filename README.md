@@ -1,5 +1,5 @@
 # ItemsCatalog
-Udacity Project
+This is an Udacity's React course project submission where I used python's web framework flask to develop a way to catalog and categorize items.
 
 ## Requirements
 
